@@ -83,6 +83,13 @@
       {% endfor %}
     </ul>
     {% endif %}
+    {% if ABUSEIPDB_BADGE %}
+    <div style="margin-top: 100px;">
+      <a href="{{ ABUSEIPDB_BADGE.url }}" title="AbuseIPDB is an IP address blacklist for webmasters and sysadmins to report IP addresses engaging in abusive behavior on their networks">
+        <img src="{{ ABUSEIPDB_BADGE.image }}" alt="AbuseIPDB Contributor Badge" style="width: 100%;background: #35c246 linear-gradient(rgba(255,255,255,0), rgba(255,255,255,.3) 50%, rgba(0,0,0,.2) 51%, rgba(0,0,0,0));padding: 5px; border-radius: unset;">
+      </a>
+    </div>
+    {% endif %}
   </div>
 
   {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.aside %}
