@@ -1,7 +1,21 @@
-<footer>
-  {% if CC_LICENSE %}
-    {% include "partial/cc_license.html" %}
-  {% else %}
-    {% include "partial/copyright.html" %}
+<footer class="site-footer">
+  <div>
+    <div>&copy; {{ COPYRIGHT_YEAR }} {{ COPYRIGHT_NAME }}</div>
+    <div style="margin-top: 4px;">
+      {% if CC_LICENSE %}
+        <a href="http://creativecommons.org/licenses/{{ CC_LICENSE.slug }}/{{ CC_LICENSE.version }}/" target="_blank">CC {{ CC_LICENSE.slug|upper }} {{ CC_LICENSE.version }}</a> &middot;
+      {% endif %}
+      Powered by <a href="https://getpelican.com/" target="_blank">Pelican</a>
+    </div>
+  </div>
+  {% if SOCIAL %}
+  <div class="footer-social">
+    {% set solid = ['at', 'envelope', 'mailbox', 'rss'] %}
+    {% for name, link in SOCIAL %}
+      <a href="{{ link }}" target="_blank" title="{{ name|capitalize }}">
+        <i class="{% if name in solid %}fa-solid{% else %}fa-brands{% endif %} fa-{{ name }}"></i>
+      </a>
+    {% endfor %}
+  </div>
   {% endif %}
 </footer>
