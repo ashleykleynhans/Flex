@@ -2,7 +2,6 @@
 
 {% block meta %}
 {{ super() }}
-
 {% if page.translations -%}
 <link rel="alternate" href="{{ SITEURL }}/{{ page.url }}" hreflang="{{ page.lang }}" />
 {% for p in page.translations %}
@@ -14,13 +13,11 @@
 {% block title %} &ndash; {{ page.title|striptags|escape }}{% endblock %}
 
 {% block content %}
-<article class="single">
-  <header>
-    {% import 'partial/translations.html' as translations with context %}
-    {{ translations.translations_for(page) }}
-    <h1 id="{{ page.slug }}">{{ page.title }}</h1>
-  </header>
-  <div>
+<article>
+  <div class="article-header">
+    <h1 class="article-title">{{ page.title }}</h1>
+  </div>
+  <div class="article-content">
     {% block before_content %}{% endblock %}
     {% block page_content %}{{ page.content }}{% endblock %}
     {% block after_content %}{% endblock %}

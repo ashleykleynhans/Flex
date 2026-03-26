@@ -3,16 +3,12 @@
 {% block title %} &ndash; {{ _('Tags') }}{% endblock %}
 
 {% block content %}
-<article class="single">
-  <header>
-    <h1 id="tags">{{ _('Tags') }}</h1>
-  </header>
-  <div>
-    <ul class="list">
-      {%- for tag, articles in tags|sort %}
-          <li><a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a> ({{ articles|count }})</li>
-      {% endfor %}
-    </ul>
-  </div>
-</article>
+<div class="list-page">
+  <h1>{{ _('Tags') }}</h1>
+  <ul class="list">
+    {%- for tag, articles in tags|sort %}
+      <li><a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a> ({{ articles|count }})</li>
+    {% endfor %}
+  </ul>
+</div>
 {% endblock %}
