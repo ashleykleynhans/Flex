@@ -10,6 +10,11 @@
       {% for name, link in LINKS %}
         <a href="{{ link }}">{{ name }}</a>
       {% endfor %}
+      {% if DISPLAY_PAGES_ON_MENU is not defined or DISPLAY_PAGES_ON_MENU %}
+        {% for page in pages %}
+          <a href="{{ SITEURL }}/{{ page.url }}">{{ page.title }}</a>
+        {% endfor %}
+      {% endif %}
       {% for title, link in MENUITEMS %}
         <a href="{{ link }}">{{ _(title) }}</a>
       {% endfor %}
