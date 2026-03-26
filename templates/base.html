@@ -35,12 +35,12 @@
   {% if THEME_COLOR == "dark" or THEME_COLOR_AUTO_DETECT_BROWSER_PREFERENCE or THEME_COLOR_ENABLE_USER_OVERRIDE %}
     <link id="dark-theme-style" rel="stylesheet" type="text/css"
       {% if THEME_COLOR_AUTO_DETECT_BROWSER_PREFERENCE %}
-        {% if THEME_COLOR|default("light") == "dark" %}
+        {% if THEME_COLOR|default("dark") == "dark" %}
           media="(prefers-color-scheme: dark), (prefers-color-scheme: no-preference)"
         {% else %}
           media="(prefers-color-scheme: dark)"
         {% endif %}
-      {% elif THEME_COLOR_ENABLE_USER_OVERRIDE and THEME_COLOR|default("light") == "light" %}
+      {% elif THEME_COLOR_ENABLE_USER_OVERRIDE and THEME_COLOR|default("dark") == "light" %}
         disabled="disabled"
       {% endif %}
     href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/stylesheet/dark-theme.min.css">
@@ -50,12 +50,12 @@
   {% if THEME_COLOR_AUTO_DETECT_BROWSER_PREFERENCE or THEME_COLOR_ENABLE_USER_OVERRIDE or THEME_COLOR == "dark" %}
     <link id="pygments-dark-theme" rel="stylesheet" type="text/css"
           {% if THEME_COLOR_AUTO_DETECT_BROWSER_PREFERENCE %}
-            {% if THEME_COLOR|default("light") == "dark" %}
+            {% if THEME_COLOR|default("dark") == "dark" %}
               media="(prefers-color-scheme: dark), (prefers-color-scheme: no-preference)"
             {% else %}
               media="(prefers-color-scheme: dark)"
             {% endif %}
-          {% elif THEME_COLOR_ENABLE_USER_OVERRIDE and THEME_COLOR|default("light") == "light" %}
+          {% elif THEME_COLOR_ENABLE_USER_OVERRIDE and THEME_COLOR|default("dark") == "light" %}
             disabled="disabled"
           {% endif %}
           href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/pygments/{{ PYGMENTS_STYLE_DARK or PYGMENTS_STYLE or 'monokai' }}.min.css">
@@ -63,7 +63,7 @@
   {% if THEME_COLOR_AUTO_DETECT_BROWSER_PREFERENCE or not THEME_COLOR or THEME_COLOR == "light" %}
     <link id="pygments-light-theme" rel="stylesheet" type="text/css"
           {% if THEME_COLOR_AUTO_DETECT_BROWSER_PREFERENCE %}
-            {% if THEME_COLOR|default("light") == "dark" %}
+            {% if THEME_COLOR|default("dark") == "dark" %}
               media="(prefers-color-scheme: light)"
             {% else %}
               media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
@@ -76,7 +76,7 @@
       {% if USE_GOOGLE_FONTS != False %}
       <link href="https://fonts.googleapis.com/css?family=Merriweather:300,400|Open+Sans" rel="stylesheet">
       {% endif %}
-    <link rel="stylesheet" 
+    <link rel="stylesheet"
     href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/tipuesearch/tipuesearch.min.css" />
   {% endif %}
 
@@ -132,7 +132,7 @@
         <link rel="canonical" href="{{ SITEURL }}/{{ output_file }}">
       {% endif %}
     {% endif %}
-  {% endif %} 
+  {% endif %}
 
   {% block meta %}
     <meta name="author" content="{{ AUTHOR }}" />
@@ -155,29 +155,17 @@
   {% include "partial/gtm.html" %}
   {% include "partial/clarity.html" %}
 </head>
-<body {% if not THEME_COLOR_AUTO_DETECT_BROWSER_PREFERENCE %}class="{{ THEME_COLOR|default('light') }}-theme"{% endif %}>
+<body {% if not THEME_COLOR_AUTO_DETECT_BROWSER_PREFERENCE %}class="{{ THEME_COLOR|default('dark') }}-theme"{% endif %}>
   {% include "partial/gtm_noscript.html" %}
 
-  {% include "partial/sidebar.html" %}
+  {% include "partial/topnav.html" %}
 
-  <main>
-    {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.main_menu %}
-      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-      <ins class="adsbygoogle ads-responsive"
-           data-ad-client="{{ GOOGLE_ADSENSE.ca_id }}"
-           data-ad-slot="{{ GOOGLE_ADSENSE.ads.main_menu }}"></ins>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-    {% endif %}
-
-    {% include "partial/nav.html" %}
-
+  <div class="site-content">
     {% block content %}
     {% endblock %}
+  </div>
 
-    {% include "partial/footer.html" %}
-  </main>
+  {% include "partial/footer.html" %}
 
   {% include "partial/jsonld.html" %}
   {% include "partial/guages.html" %}
@@ -186,6 +174,14 @@
   {% include 'partial/github.html' %}
   {% include 'partial/stork.html' %}
   {% include 'partial/cf_analytics.html' %}
+
+  {% if THEME_COLOR_ENABLE_USER_OVERRIDE %}
+  <script id="dark-theme-script"
+          src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/dark-theme/dark-theme{% if not USE_LESS %}.min{% endif %}.js"
+          data-default-theme="{{ THEME_COLOR|default('dark') }}"
+          data-enable-auto-detect-theme="{{ THEME_COLOR_AUTO_DETECT_BROWSER_PREFERENCE|default(False)|lower }}">
+  </script>
+  {% endif %}
 
   {% block additional_js %}{% endblock %}
 </body>
