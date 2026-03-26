@@ -1,0 +1,42 @@
+<nav class="top-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="{{ SITEURL }}/">
+      {% if SITELOGO %}
+      <img src="{{ SITELOGO }}" alt="{{ SITETITLE }}">
+      {% endif %}
+      {{ SITETITLE }}
+    </a>
+    <div class="nav-links">
+      {% for name, link in LINKS %}
+        <a href="{{ link }}">{{ name }}</a>
+      {% endfor %}
+      {% for title, link in MENUITEMS %}
+        <a href="{{ link }}">{{ _(title) }}</a>
+      {% endfor %}
+      {% if FEED_ALL_ATOM %}
+        <a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}">{{ _('Atom') }}</a>
+      {% endif %}
+
+      {% if SOCIAL %}
+      <div class="nav-social">
+        {% set solid = ['at', 'envelope', 'mailbox', 'rss'] %}
+        {% set relme = ['at', 'envelope', 'mailbox', 'mastodon'] %}
+        {% for name, link in SOCIAL %}
+          <a {% if name in relme %}rel="me"{% endif %}
+             href="{{ link }}"
+             target="_blank"
+             title="{{ name|capitalize }}">
+            <i class="{% if name in solid %}fa-solid{% else %}fa-brands{% endif %} fa-{{ name }}"></i>
+          </a>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% if THEME_COLOR_ENABLE_USER_OVERRIDE %}
+      <button class="theme-toggle" onclick="theme.switch(document.body.classList.contains('dark-theme') ? 'light' : 'dark')" title="Toggle theme">
+        <i class="fa-solid fa-sun"></i>
+      </button>
+      {% endif %}
+    </div>
+  </div>
+</nav>
