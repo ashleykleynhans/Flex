@@ -103,6 +103,8 @@
     {% include "partial/og.html" %}
   {% endblock %}
 
+  {% include "partial/twitter_card.html" %}
+
   <title>{{ SITENAME }}{% block title %}{% endblock %}</title>
 
   {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.page_level_ads %}
@@ -130,7 +132,11 @@
 
   {% include "partial/footer.html" %}
 
+  {% if article %}
+  {% include "partial/jsonld_article.html" %}
+  {% else %}
   {% include "partial/jsonld.html" %}
+  {% endif %}
   {% include "partial/guages.html" %}
   {% include "partial/addthis.html" %}
   {% include "partial/matomo.html" %}

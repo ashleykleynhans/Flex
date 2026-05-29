@@ -1,0 +1,12 @@
+{% if not PLUGINS or 'seo' not in PLUGINS or 'pelican.plugins.seo' not in PLUGINS %}
+<meta name="twitter:card" content="summary_large_image"/>
+{% if article %}
+<meta name="twitter:title" content="{{ article.title|striptags|escape }}"/>
+<meta name="twitter:description" content="{{ article.summary|striptags|escape }}"/>
+<meta name="twitter:image" content="{% if 'cover' in article.metadata %}{{ SITEURL }}/{{ article.metadata['cover'] }}{% else %}{{ SITEURL }}{{ SITELOGO }}{% endif %}"/>
+{% else %}
+<meta name="twitter:title" content="{{ SITENAME }}"/>
+<meta name="twitter:description" content="{{ SITEDESCRIPTION }}"/>
+<meta name="twitter:image" content="{{ SITEURL }}{{ SITELOGO }}"/>
+{% endif %}
+{% endif %}
