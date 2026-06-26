@@ -37,13 +37,5 @@
 {% endfor %}
 </div>
 
-{% if ABUSEIPDB_BADGE %}
-<div class="abuseipdb-badge">
-  <a href="{{ ABUSEIPDB_BADGE.url }}" title="AbuseIPDB Contributor">
-    <img src="{{ ABUSEIPDB_BADGE.image }}" alt="AbuseIPDB Contributor Badge" style="background: #35c246 linear-gradient(rgba(255,255,255,0), rgba(255,255,255,.3) 50%, rgba(0,0,0,.2) 51%, rgba(0,0,0,0)); padding: 5px;">
-  </a>
-</div>
-{% endif %}
-
 {% include "partial/pagination.html" %}
 {% endblock %}
